@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ receita.nome }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>{{ receita.nome }}</h1>
+        <p><strong>Rendimento:</strong> {{ receita.rendimento }} {{ receita.unidade_rendimento }}</p>
+        <h2>Ingredientes</h2>
+        <ul class="list-group mb-4">
+            {% for ingrediente in receita.ingredientes %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ ingrediente.nome }}: {{ ingrediente.quantidade }} {{ ingrediente.unidade }}
+                <div>
+                    <form action="{{ url_for('delete_ingrediente', id=ingrediente.id) }}" method="POST"
+                        style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                    <form
+                        action="{{ url_for('visualizar_ingrediente', receita_id=receita.id, ingrediente_id=ingrediente.id) }}"
+                        method="POST" style="display:inline;">
+                        <input type="number" step="0.01" class="form-control d-inline-block" name="nova_quantidade"
+                            placeholder="Nova quantidade" required style="width: 120px; margin-left: 10px;">
+                        <button type="submit" class="btn btn-info btn-sm">Visualizar Ajuste</button>
+                    </form>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <form action="{{ url_for('receita', id=receita.id) }}" method="POST" class="mb-4">
+            <div class="form-group">
+                <label for="nome_ingrediente">Nome do Ingrediente:</label>
+                <input type="text" class="form-control" id="nome_ingrediente" name="nome_ingrediente" required>
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" step="0.01" class="form-control" id="quantidade" name="quantidade" required>
+            </div>
+            <div class="form-group">
+                <label for="unidade">Unidade:</label>
+                <input type="text" class="form-control" id="unidade" name="unidade" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar Ingrediente</button>
+        </form>
+        <form action="{{ url_for('visualizar_ajuste', id=receita.id) }}" method="POST" class="mb-4">
+            <div class="form-group">
+                <label for="novo_rendimento">Novo Rendimento:</label>
+                <input type="number" class="form-control" id="novo_rendimento" name="novo_rendimento" required>
+            </div>
+            <button type="submit" class="btn btn-info">Visualizar Ajuste de Rendimento</button>
+        </form>
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">Voltar</a>
+        <form action="{{ url_for('delete_receita', id=receita.id) }}" method="POST" class="mt-4">
+            <button type="submit" class="btn btn-danger">Excluir Receita</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuste Visualizado</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>{{ receita.nome }}</h1>
+        <p><strong>Rendimento Original:</strong> {{ receita.rendimento }} {{ receita.unidade_rendimento }}</p>
+        <p><strong>Rendimento Ajustado:</strong> {{ rendimento }} {{ receita.unidade_rendimento }}</p>
+        <h2>Ingredientes Ajustados</h2>
+        <ul class="list-group mb-4">
+            {% for ing in ingredientes %}
+            <li class="list-group-item">
+                {{ ing.nome }}: {{ ing.quantidade }} {{ ing.unidade }}
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('receita', id=receita.id) }}" class="btn btn-secondary">Voltar</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Receita</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Adicionar Receita</h1>
+        <form action="{{ url_for('add_receita') }}" method="POST">
+            <div class="form-group">
+                <label for="nome">Nome da Receita:</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="rendimento">Rendimento:</label>
+                <input type="number" class="form-control" id="rendimento" name="rendimento" required>
+            </div>
+            <div class="form-group">
+                <label for="unidade_rendimento">Unidade de Rendimento:</label>
+                <input type="text" class="form-control" id="unidade_rendimento" name="unidade_rendimento" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+            <a href="{{ url_for('home') }}" class="btn btn-secondary">Voltar</a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
